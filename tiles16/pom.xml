@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rolmedo</groupId>
-	<artifactId>tiles16</artifactId>
+	<artifactId>tiles15</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tiles16</name>
+	<name>tiles15</name>
 	<description>Test project</description>
 	<properties>
 		<java.version>11</java.version>

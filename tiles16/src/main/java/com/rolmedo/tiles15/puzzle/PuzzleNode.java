@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.rolmedo.tiles16.puzzle;
+package com.rolmedo.tiles15.puzzle;
 
-import com.rolmedo.tiles16.tools.PuzzleParams;
+import com.rolmedo.tiles15.tools.PuzzleParams;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -35,10 +35,46 @@ public class PuzzleNode {
     public ArrayList<Integer> getPuzzle(){
         return this.puzzle;
     }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getmDistance() {
+        return mDistance;
+    }
+
+    public void setmDistance(int mDistance) {
+        this.mDistance = mDistance;
+    }
+
+    public int getfValue() {
+        return fValue;
+    }
+
+    public void setfValue(int fValue) {
+        this.fValue = fValue;
+    }
+
+    public int getBlankPosition() {
+        return blankPosition;
+    }
+
+    public void setBlankPosition(int blankPosition) {
+        this.blankPosition = blankPosition;
+    }
     
     @Override
     public int hashCode(){
-        return this.puzzle.hashCode();
+        final int prime = 31;
+	int result = 1;
+	result = prime * result + this.puzzle.hashCode();
+	return result;
+
     }
 
     @Override

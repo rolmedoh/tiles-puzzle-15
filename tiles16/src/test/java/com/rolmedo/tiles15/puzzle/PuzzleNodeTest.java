@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.rolmedo.tiles16.puzzle;
+package com.rolmedo.tiles15.puzzle;
 
+import com.rolmedo.tiles15.puzzle.IDAStarHelper;
+import com.rolmedo.tiles15.puzzle.IDAStar;
+import com.rolmedo.tiles15.puzzle.PuzzleNode;
 import java.util.ArrayList;
+import java.util.Set;
 import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -69,15 +73,23 @@ public class PuzzleNodeTest {
     /**
      * Test of hashCode method, of class PuzzleNode.
      */
-    @Ignore
+    @Test
     public void testHashCode() {
-        System.out.println("hashCode");
-        PuzzleNode instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Searching Goal: ");
+    	PuzzleNode startNode = PuzzleNode.generatePuzzleNode();
+		IDAStar test = new IDAStar();
+		final long startTime = System.currentTimeMillis();
+		Set<String> pathVisited = test.ida(startNode);
+		final long endTime = System.currentTimeMillis();
+		if (pathVisited != null) {
+			System.out.println("Moves to reach goal.");
+			IDAStarHelper.printArray(pathVisited);
+		} else {
+			System.out.println("No solution found!");
+		}
+		System.out.print("Time taken to run the IDA*:" + (endTime - startTime)
+				+ " milli seconds.");
+               assertNotNull(startNode);
     }
 
     /**
