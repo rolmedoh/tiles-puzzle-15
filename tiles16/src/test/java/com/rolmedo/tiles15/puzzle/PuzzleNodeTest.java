@@ -5,11 +5,7 @@
  */
 package com.rolmedo.tiles15.puzzle;
 
-import com.rolmedo.tiles15.puzzle.IDAStarHelper;
-import com.rolmedo.tiles15.puzzle.IDAStar;
-import com.rolmedo.tiles15.puzzle.PuzzleNode;
-import java.util.ArrayList;
-import java.util.Set;
+import com.rolmedo.tiles15.tools.PuzzleTools;
 import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -17,18 +13,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author ruben
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class PuzzleNodeTest {
-    
+          
+
     public PuzzleNodeTest() {
+     
     }
     
     @BeforeAll
     public static void setUpClass() {
+      
     }
     
     @AfterAll
@@ -49,9 +56,9 @@ public class PuzzleNodeTest {
     @Test
     public void testGeneratePuzzleNode() {
         System.out.println("generatePuzzleNode");
-        PuzzleNode expResult = null;
-        PuzzleNode result = PuzzleNode.generatePuzzleNode();
-        System.out.println(result.getPuzzle().toString());
+        Puzzle expResult = null;
+        Puzzle result = Puzzle.generatePuzzle(15);
+        System.out.println(result.toString());
         assertNotEquals(expResult, result);
     }
 
@@ -61,36 +68,15 @@ public class PuzzleNodeTest {
     @Test
     public void testGetPuzzles() {
         System.out.println("getPuzzles");
-        PuzzleNode expResult = null;
-        PuzzleNode result = null;
+        Puzzle expResult = null;
+        Puzzle result = null;
         for(int i = 0; i < 10; i++){
-             result = PuzzleNode.generatePuzzleNode();
-             System.out.println(result.getPuzzle().toString() + " Puzzle Hash: " + result.hashCode());
+             result = Puzzle.generatePuzzle(15);
+             System.out.println(result.toString());
         }
         assertNotEquals(expResult, result);
     }
 
-    /**
-     * Test of hashCode method, of class PuzzleNode.
-     */
-    @Test
-    public void testHashCode() {
-        System.out.println("Searching Goal: ");
-    	PuzzleNode startNode = PuzzleNode.generatePuzzleNode();
-		IDAStar test = new IDAStar();
-		final long startTime = System.currentTimeMillis();
-		Set<String> pathVisited = test.ida(startNode);
-		final long endTime = System.currentTimeMillis();
-		if (pathVisited != null) {
-			System.out.println("Moves to reach goal.");
-			IDAStarHelper.printArray(pathVisited);
-		} else {
-			System.out.println("No solution found!");
-		}
-		System.out.print("Time taken to run the IDA*:" + (endTime - startTime)
-				+ " milli seconds.");
-               assertNotNull(startNode);
-    }
 
     /**
      * Test of equals method, of class PuzzleNode.
@@ -99,7 +85,7 @@ public class PuzzleNodeTest {
     public void testEquals() {
         System.out.println("equals");
         Object obj = null;
-        PuzzleNode instance = null;
+        Puzzle instance = null;
         boolean expResult = false;
         boolean result = instance.equals(obj);
         assertEquals(expResult, result);
