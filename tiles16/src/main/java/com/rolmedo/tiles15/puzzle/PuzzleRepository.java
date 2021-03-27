@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  *
  * @author ruben
  */
-@Repository
-public interface PuzzleRepository extends CrudRepository<Puzzle,String> {}
+public interface PuzzleRepository extends CrudRepository<Puzzle,String> {
+}

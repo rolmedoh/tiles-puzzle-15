@@ -5,17 +5,12 @@
  */
 package com.rolmedo.tiles15.puzzle;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.UUID;
-import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -23,37 +18,35 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @param <Integer>
  */
 @Entity
-@Table
 public abstract class Puzzle{
       
     @Id
-    @GeneratedValue
-    @Column
-    protected String id;
-    @Column
-    protected ArrayList<Integer> tiles;
-    @Column
-    protected Boolean solvable;
+    protected UUID id;
+    @ElementCollection
+    protected List<Integer> tiles;
+    protected Boolean solvable = null;
     
-    public static Puzzle generatePuzzle(int tiles){
-        
-        switch(tiles){
-            case 15: PuzzleTiles15 puzzle = new PuzzleTiles15();
-                     return puzzle;
-                
-            default: return null;
-        }
-       
-    }
-
     public abstract int getPuzzleSize();
     public abstract Boolean isSolvable();
     @Override
     public String toString() {
-        return "Puzzle=[id=" + id + ",values=" + this.tiles.toString() + ",solvable=" + this.isSolvable() + "]";
+        return "Puzzle=[id=" + id + ",values=" + this.tiles.toString() + ",solvable=" + this.solvable + "]";
     }
-    public String getId(){
+    public UUID getId(){
         return this.id;
     }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setTiles(List<Integer> tiles) {
+        this.tiles = tiles;
+    }
+
+    public void setSolvable(Boolean solvable) {
+        this.solvable = solvable;
+    }
+    
 }
 

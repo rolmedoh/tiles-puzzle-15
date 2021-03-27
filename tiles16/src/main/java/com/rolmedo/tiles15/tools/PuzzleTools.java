@@ -6,8 +6,10 @@
 package com.rolmedo.tiles15.tools;
 
 import com.rolmedo.tiles15.puzzle.Puzzle;
+import com.rolmedo.tiles15.puzzle.PuzzleTiles15;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -31,7 +33,7 @@ public class PuzzleTools {
      * @param puzzle
      * @return 
      */
-    public static Boolean checkSolvable(ArrayList<Integer> tiles){
+    public static Boolean checkSolvable(List<Integer> tiles){
         int countInversions = 0;
 
         for (int i = 0; i < tiles.size(); i++) {
@@ -43,4 +45,14 @@ public class PuzzleTools {
         return countInversions % 2 == 0;
     }
 
+     public static Puzzle generatePuzzle(int tilesNumber){
+        Puzzle puzzle = null;
+        switch(tilesNumber){
+            case 15: puzzle = new PuzzleTiles15();
+                     System.out.println("Aki llega 3");
+                     break;
+            
+        }
+        return puzzle;
+    }
 }

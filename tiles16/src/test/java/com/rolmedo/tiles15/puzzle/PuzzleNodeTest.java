@@ -28,7 +28,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class PuzzleNodeTest {
           
-
+    @Autowired
+    private PuzzleService puzzleService;
+    
     public PuzzleNodeTest() {
      
     }
@@ -57,7 +59,9 @@ public class PuzzleNodeTest {
     public void testGeneratePuzzleNode() {
         System.out.println("generatePuzzleNode");
         Puzzle expResult = null;
-        Puzzle result = Puzzle.generatePuzzle(15);
+        Puzzle result = PuzzleTools.generatePuzzle(15);
+        System.out.println("LLega "+result.toString());
+        puzzleService.saveOrUpdate(result);
         System.out.println(result.toString());
         assertNotEquals(expResult, result);
     }
@@ -71,8 +75,8 @@ public class PuzzleNodeTest {
         Puzzle expResult = null;
         Puzzle result = null;
         for(int i = 0; i < 10; i++){
-             result = Puzzle.generatePuzzle(15);
-             System.out.println(result.toString());
+             result = PuzzleTools.generatePuzzle(15);
+             puzzleService.saveOrUpdate(result);
         }
         assertNotEquals(expResult, result);
     }

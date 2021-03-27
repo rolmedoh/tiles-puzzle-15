@@ -7,23 +7,26 @@ package com.rolmedo.tiles15.puzzle;
 
 import com.rolmedo.tiles15.tools.PuzzleTools;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
+import javax.persistence.Entity;
 
 
 /**
  *
  * @author ruben
- * @param <Integer>
+ * @param
  */
-public class PuzzleTiles15<Integer> extends Puzzle implements Serializable{
+@Entity
+public class PuzzleTiles15 extends Puzzle{
     
     private static final int PUZZLE_SIZE = 16;
             
-    protected PuzzleTiles15(){
-        super();
-        this.tiles.addAll(PuzzleTools.getRandomPuzzle(PUZZLE_SIZE));
-        this.id = UUID.randomUUID().toString();  
+    public PuzzleTiles15(){
+        this.tiles = PuzzleTools.getRandomPuzzle(PUZZLE_SIZE);
+        this.id = UUID.randomUUID(); 
+        System.out.println("Puzzle created");
     }
     
   
