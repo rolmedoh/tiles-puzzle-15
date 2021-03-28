@@ -75,7 +75,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
                                  <configuration>
                                     <mainClass>com.rolmedo.tiles15.TilesApplication</mainClass>
-                                    <layout>jar</layout>
                                 </configuration>
 			</plugin>
                         <plugin>
