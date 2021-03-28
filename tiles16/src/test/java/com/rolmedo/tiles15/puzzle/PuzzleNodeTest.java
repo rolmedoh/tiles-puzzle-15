@@ -6,30 +6,33 @@
 package com.rolmedo.tiles15.puzzle;
 
 import com.rolmedo.tiles15.tools.PuzzleTools;
-import org.junit.Ignore;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.runner.RunWith;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.junit4.SpringRunner;
-
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
+import org.junit.Ignore;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 /**
  *
  * @author ruben
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class PuzzleNodeTest {
           
     @Autowired
     private PuzzleService puzzleService;
+    
+    private String fakeId = "7341813d-e0eb-4d12-9cc4-1f7ca6ea41ce";
     
     public PuzzleNodeTest() {
      
@@ -58,11 +61,11 @@ public class PuzzleNodeTest {
     @Test
     public void testGeneratePuzzleNode() {
         System.out.println("generatePuzzleNode");
-        Puzzle expResult = null;
-        Puzzle result = PuzzleTools.generatePuzzle(15);
-        System.out.println("LLega "+result.toString());
+        PuzzleTiles15 expResult = null;
+        PuzzleTiles15 result = PuzzleTools.generatePuzzle();
         puzzleService.saveOrUpdate(result);
-        System.out.println(result.toString());
+        result.isSolvable();
+        puzzleService.saveOrUpdate(result);
         assertNotEquals(expResult, result);
     }
 
@@ -72,11 +75,16 @@ public class PuzzleNodeTest {
     @Test
     public void testGetPuzzles() {
         System.out.println("getPuzzles");
-        Puzzle expResult = null;
-        Puzzle result = null;
+        PuzzleTiles15 expResult = null;
+        PuzzleTiles15 result = null;
+        try{
         for(int i = 0; i < 10; i++){
-             result = PuzzleTools.generatePuzzle(15);
-             puzzleService.saveOrUpdate(result);
+             result = PuzzleTools.generatePuzzle();
+             result.isSolvable();        
+             System.out.println(result.toString());
+        }
+        }catch(Exception ex){
+            System.out.println("Error "+ ex.getLocalizedMessage());
         }
         assertNotEquals(expResult, result);
     }
@@ -85,16 +93,27 @@ public class PuzzleNodeTest {
     /**
      * Test of equals method, of class PuzzleNode.
      */
-    @Ignore
+    @Test
     public void testEquals() {
-        System.out.println("equals");
+        System.out.println("Retrieve object");
         Object obj = null;
-        Puzzle instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        PuzzleTiles15 instance = null;
+        instance = puzzleService.getPuzzleById(fakeId.toString());
+        if(Objects.isNull(instance)){
+            System.out.println("The puzzle with ID "+fakeId+" doesn't exists");
+            assertEquals(instance, obj);
+        }
+    }
+    
+    @Test
+    public void testEqualsObject() {
+        System.out.println("Retrieve object");
+        PuzzleTiles15 obj = null;
+        PuzzleTiles15 instance = null;
+        instance = PuzzleTools.generatePuzzle();
+        puzzleService.saveOrUpdate(instance);
+        obj = puzzleService.getPuzzleById(instance.getId());
+        assertEquals(instance.id, obj.id);
     }
     
 }

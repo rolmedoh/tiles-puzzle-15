@@ -5,8 +5,11 @@
  */
 package com.rolmedo.tiles15.puzzle;
 
+import com.rolmedo.tiles15.tools.PuzzleTools;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +23,22 @@ public class PuzzleService {
     @Autowired
     PuzzleRepository puzzleRepository;
 
-    public List<Puzzle> getAllPuzzle() {
-        List<Puzzle> puzzles = new ArrayList<Puzzle>();
+    public List<PuzzleTiles15> getAllPuzzle() {
+        List<PuzzleTiles15> puzzles = new ArrayList<>();
         puzzleRepository.findAll().forEach(puzzle -> puzzles.add(puzzle));
         return puzzles;
     }
 
-    public Puzzle getPuzzleById(String id) {
-        return puzzleRepository.findById(id).get();
+    public PuzzleTiles15 getPuzzleById(String id) {    
+        try{
+            return puzzleRepository.findById(id).get();
+        }catch(NoSuchElementException ex){
+            PuzzleTools.LOGGER.info("DB error -> Element do not exists: ID " + id);
+            return null;
+        }
     }
 
-    public void saveOrUpdate(Puzzle puzzle) {
-         System.out.println("LLega 2"+puzzle);
+    public void saveOrUpdate(PuzzleTiles15 puzzle) {
         puzzleRepository.save(puzzle);
     }
 

@@ -6,11 +6,9 @@
 package com.rolmedo.tiles15.puzzle;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author ruben
  */
-public interface PuzzleRepository extends CrudRepository<Puzzle,String> {
-}
+public interface PuzzleRepository extends CrudRepository<PuzzleTiles15,String> {}
