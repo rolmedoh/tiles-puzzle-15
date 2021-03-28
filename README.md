@@ -1,12 +1,12 @@
 # tiles-puzzle-15
 
-##How to run it:
+## How to run it:
 
-###Requeriments:
+### Requeriments:
 Maven
 jdk-11-corretto
 
-###Compile
+### Compile
 
 Download the source code and execute:
 
@@ -17,7 +17,7 @@ After all the test will create a folder target where you can find the test resul
 run on terminal:
 java -jar tiles-0.0.1-SNAPSHOT.jar
 
-##Access
+## Access
 
 the service will create the memory database (h2) and you can access to the API url.
 
