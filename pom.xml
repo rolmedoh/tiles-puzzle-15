@@ -15,6 +15,7 @@
 	<description>Test project</description>
 	<properties>
 		<java.version>11</java.version>
+                <start-class>com.rolmedo.tiles15.TilesApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -72,6 +73,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                                 <configuration>
+                                    <mainClass>com.rolmedo.tiles15.TilesApplication</mainClass>
+                                    <layout>jar</layout>
+                                </configuration>
 			</plugin>
                         <plugin>
                         <groupId>org.jacoco</groupId>
