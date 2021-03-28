@@ -32,3 +32,10 @@ localhost:8080/swagger-ui/
 By default the memory database console is enable and the password is on the configuration file
 
 localhost:8080/h2
+
+## Scalability
+
+The service uses jpa so shouln't be difficult to adapt it to a share database. Depending of the servers the number os workers can be edited.
+For the quick solution I will pick an HA-proxy or any service that can be use as proxy. Usually I set a header value (that is why is on the api) to check where the connection is authorized to send request but right now is on blank.
+
+For a long run solution I can imagine docker and autodiscover. With autodeploy and a pipeline that can do it automatically.
